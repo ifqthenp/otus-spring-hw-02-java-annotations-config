@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id 'groovy'
+    id 'application'
+}
+
+group 'otus.spring.2018-06'
+version '1.0.0'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+/* ************************************************************************** */
+/*                         Dependencies Configuration                         */
+/* ************************************************************************** */
+
+repositories {
+    jcenter()
+}
+
+ext {
+    springVersion = '5.0.7.RELEASE'
+    springTest = '5.0.7.RELEASE'
+    openCsvVersion = '4.2'
+    spockVersion = '1.1-groovy-2.4'
+}
+
+dependencies {
+    implementation "org.springframework:spring-context:$springVersion"
+    testCompile "org.springframework:spring-test:$springTest"
+    implementation "com.opencsv:opencsv:$openCsvVersion"
+    testCompile "org.spockframework:spock-core:$spockVersion"
+}
+
+/* ************************************************************************** */
+/*                            Custom Task Configuration                       */
+/* ************************************************************************** */
+
+clean.doFirst {
+    delete "out"
+}
+
+/* ************************************************************************** */
+/*                          Executable Jar configuration                      */
+/* ************************************************************************** */
+
+project.mainClassName = "com.otus.spring.App"
+
+task fatJar(type: Jar) {
+    archiveName = "otus-spring-hw-02-fatjar.${extension}"
+    manifest {
+        attributes(
+            "Implementation-Title": "Otus Spring 06/2018",
+            "Implementation-Version": version,
+            "Main-Class": mainClassName
+        )
+    }
+    from {
+        configurations.compileClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    with jar
+}
