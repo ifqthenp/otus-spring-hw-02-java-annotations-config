@@ -50,4 +50,3 @@ to the JVM:
 ```shell
 java -jar -Dapplication.locale=lv-LV build/libs/otus-spring-hw-02-fatjar.jar
 ```
-
