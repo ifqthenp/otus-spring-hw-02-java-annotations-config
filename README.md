@@ -42,6 +42,8 @@ Run the program:
 java -jar build/libs/otus-spring-hw-02-java-annotations-config.jar
 ```
 
+## Changing application locale
+
 Application's default locale is `en-GB`. To change locale to `ru-RU` or `lv-LV`
 change locale in `application.properties` file and re-build the project using
 `./gradlew clean fatJar` command. Another option is to pass environment variable
@@ -50,4 +52,3 @@ to the JVM:
 ```shell
 java -jar -Dapplication.locale=lv-LV build/libs/otus-spring-hw-02-fatjar.jar
 ```
-
